@@ -10,6 +10,8 @@ namespace movieTickets.Data
         Action = 1,
         Comedy,
         Drama,
-        Documentary
+        Documentary,
+        Horror,
+        Cartoon
     }
 }
