@@ -25,7 +25,7 @@ namespace movieTickets.Controllers
         public async Task<IActionResult> Index() //асинхронно взимане на списъка с продуценти
         {
             var allProducers = await _context.Producers.ToListAsync();
-            return View();
+            return View(allProducers);
         }
     }
 }
