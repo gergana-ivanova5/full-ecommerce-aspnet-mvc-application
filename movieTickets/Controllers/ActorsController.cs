@@ -20,7 +20,7 @@ namespace movieTickets.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var data = await _service.GetAll();
+            var data = await _service.GetAllAsync();
             return View(data);
         }
 
@@ -37,8 +37,19 @@ namespace movieTickets.Controllers
             {
                 return View(actor);
             }
-            _service.Add(actor);
+            await _service.AddAsync(actor);
             return RedirectToAction(nameof(Index));
+        }
+
+        //Get: Actors/Deatils/1
+        public async Task<IActionResult> Details(int id)
+        {
+            //we need to check if an actor with that id exists in our database
+            var actorDetails = await _service.GetByIdAsync(id);
+
+            //we check if the actor is known
+            if (actorDetails == null) return View("Empty");
+            return View(actorDetails);
         }
     } 
 }
