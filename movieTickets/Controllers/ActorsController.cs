@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using movieTickets.Data;
 using movieTickets.Data.Services;
+using movieTickets.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,17 @@ namespace movieTickets.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("FullName, ProfilePictureURL, Bio")]Actor actor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+            _service.Add(actor);
+            return RedirectToAction(nameof(Index));
         }
     } 
 }
