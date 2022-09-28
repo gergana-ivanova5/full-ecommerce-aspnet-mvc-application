@@ -41,7 +41,7 @@ namespace movieTickets.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //Get: Actors/Deatils/1
+        //Get: Actors/Details/1
         public async Task<IActionResult> Details(int id)
         {
             //we need to check if an actor with that id exists in our database
