@@ -48,8 +48,30 @@ namespace movieTickets.Controllers
             var actorDetails = await _service.GetByIdAsync(id);
 
             //we check if the actor is known
-            if (actorDetails == null) return View("Empty");
+            if (actorDetails == null) return View("NotFound");
             return View(actorDetails);
+        }
+
+        //Get: Actors/Create
+        public async Task <IActionResult> Edit(int id)
+        {
+            //we need to check if an actor with that id exists in our database
+            var actorDetails = await _service.GetByIdAsync(id);
+
+            //we check if the actor is known
+            if (actorDetails == null) return View("NotFound");
+            return View(actorDetails);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id, FullName, ProfilePictureURL, Bio")] Actor actor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+            await _service.UpdateAsync(id, actor);
+            return RedirectToAction(nameof(Index));
         }
     } 
 }
