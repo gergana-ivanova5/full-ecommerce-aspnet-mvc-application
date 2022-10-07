@@ -14,9 +14,9 @@ namespace movieTickets.Data.Base
             _context = context;
         }
 
-        public Task AddAsync(T entity)
+        public async Task AddAsync(T entity)
         {
-            throw new NotImplementedException();
+           await _context.Set<T>().AddAsync(entity);
         }
 
         public Task DeleteAsync(int id)
